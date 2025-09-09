@@ -39,22 +39,18 @@ services:
     volumes:
       - ./mlruns:/mlruns
     command: >
-      bash -c "
-      pip install mlflow psycopg2-binary boto3 &&
-      mlflow server
-        --backend-store-uri postgresql://mlflow:mlflow@postgres:5432/mlflowdb
-        --default-artifact-root s3://mlflow/
-        --host 0.0.0.0
-        --port 5000
-      "
+      bash -c "pip install mlflow psycopg2-binary boto3 &&
+               mlflow server \
+                 --backend-store-uri postgresql://mlflow:mlflow@postgres:5432/mlflowdb \
+                 --default-artifact-root s3://mlflow/ \
+                 --host 0.0.0.0 \
+                 --port 5000"
     environment:
       AWS_ACCESS_KEY_ID: minio
       AWS_SECRET_ACCESS_KEY: minio123
       MLFLOW_S3_ENDPOINT_URL: http://minio:9000
     ports:
       - "5000:5000"
-    expose:
-      - "5000"
 
   proxy:
     build: .

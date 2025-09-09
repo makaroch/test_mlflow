@@ -47,3 +47,7 @@ async def proxy(path: str, request: Request, role: str = Depends(get_user_role))
         headers=dict(mlflow_response.headers),
         media_type=mlflow_response.headers.get("content-type")
     )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

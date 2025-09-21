@@ -1,0 +1,13 @@
+services:
+  postgres:
+    env_file:
+      - ./../.env
+    image: postgres:15
+    container_name: fastapi_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: 1111
+      POSTGRES_DB: mlflow
+    ports:
+      - "5532:5432"
